@@ -1,7 +1,7 @@
-"use cleint"
+"use client"
 
 import CreateBlog from "./components/createBlog";
-import ShowBlog from "./components/shoBlog";
+import ShowBlog from "./components/showBlog";
 
  
 export default function Home() {

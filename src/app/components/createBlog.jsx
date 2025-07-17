@@ -1,10 +1,12 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import data from "@emoji-mart/data";
-import Picker from "@emoji-mart/react"; 
+import Picker from "@emoji-mart/react";
 import Modal from "@/components/ui/modal";
+import { useCreateBlogMutation } from "@/network/blogApi";
 // import 'emoji-mart/css/emoji-mart.css'
 const CreateBlog = () => {
+  const [createBlog, { data, isError, error }] = useCreateBlogMutation();
   const [color, setColor] = useState("");
   const [emojiState, setEmojiState] = useState("");
   const [showPicker, setShowPicker] = useState(false);
@@ -12,20 +14,23 @@ const CreateBlog = () => {
   const insertEmoji = (emoji) => {
     const el = editableRef.current;
     if (!el) return;
-
     const selection = window.getSelection();
     if (!selection || !selection.rangeCount) return;
-
     const range = selection.getRangeAt(0);
     range.deleteContents();
     const emojiNode = document.createTextNode(emoji);
     range.insertNode(emojiNode);
-
     // Move caret after emoji
     range.setStartAfter(emojiNode);
     range.setEndAfter(emojiNode);
     selection.removeAllRanges();
     selection.addRange(range);
+  };
+  const blogSubmit = () => {
+    console.log(editableRef?.current?.innerText);
+    createBlog({
+      blog: editableRef?.current?.innerText,
+    });
   };
   return (
     <div className="">
@@ -80,7 +85,7 @@ const CreateBlog = () => {
                 data={data}
                 onEmojiSelect={(e) => {
                   insertEmoji(e.native);
-                //   setShowPicker(false);
+                  //   setShowPicker(false);
                 }}
                 theme="light"
               />
@@ -101,6 +106,7 @@ const CreateBlog = () => {
           ))}
         </div>
       </Modal>
+      <button onClick={blogSubmit}>submit </button>
     </div>
   );
 };
