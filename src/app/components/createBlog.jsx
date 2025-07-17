@@ -1,9 +1,8 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
-import data from "@emoji-mart/data";
-import Picker from "@emoji-mart/react";
+import React, { useEffect, useRef, useState } from "react"; 
 import Modal from "@/components/ui/modal";
 import { useCreateBlogMutation } from "@/network/blogApi";
+import EmojiPicker from "emoji-picker-react";
 // import 'emoji-mart/css/emoji-mart.css'
 const CreateBlog = () => {
   const [createBlog, { data, isError, error }] = useCreateBlogMutation();
@@ -79,18 +78,7 @@ const CreateBlog = () => {
           >
             😀
           </button>
-          {showPicker && (
-            <div className="absolute bottom-6">
-              <Picker
-                data={data}
-                onEmojiSelect={(e) => {
-                  insertEmoji(e.native);
-                  //   setShowPicker(false);
-                }}
-                theme="light"
-              />
-            </div>
-          )}
+            { showPicker&&<EmojiPicker />}
         </div>
         {/* Color Options */}
         <div className="mt-4 flex gap-2 justify-center">
