@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react"; 
+import React, { useEffect, useRef, useState } from "react";
 import Modal from "@/components/ui/modal";
 import { useCreateBlogMutation } from "@/network/blogApi";
 import EmojiPicker from "emoji-picker-react";
@@ -78,7 +78,7 @@ const CreateBlog = () => {
           >
             😀
           </button>
-            { showPicker&&<EmojiPicker />}
+          {showPicker && <EmojiPicker />}
         </div>
         {/* Color Options */}
         <div className="mt-4 flex gap-2 justify-center">
